@@ -16,7 +16,12 @@ export const Dropdown: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <div className="border bg-white border-black flex flex-col w-[220px] max-h-fit">
+      <div
+        className={cn('border bg-white  flex flex-col w-[220px] max-h-fit', {
+          'border-black': openedDropdowns.includes(name),
+          'border-[#E3E8EE]': !openedDropdowns.includes(name)
+        })}
+      >
         <button
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
@@ -68,9 +73,7 @@ export const Dropdown: React.FC<Props> = ({
           >
             {props.map(data => (
               <li key={data.value}>
-                <p className="block px-5 py-2 hover:bg-gray-100">
-                  {data.name}
-                </p>
+                <p className="block px-5 py-2 hover:bg-gray-100">{data.name}</p>
               </li>
             ))}
           </ul>

@@ -2,10 +2,10 @@ import React from 'react';
 import { Country, Department, Status, User } from '../types';
 
 interface Props {
-  setCountries: React.Dispatch<React.SetStateAction<Country[] | null>>;
-  setDepartments: React.Dispatch<React.SetStateAction<Department[] | null>>;
-  setStatuses: React.Dispatch<React.SetStateAction<Status[] | null>>;
-  setUsers: React.Dispatch<React.SetStateAction<User[] | null>>;
+  setCountries: React.Dispatch<React.SetStateAction<Country[]>>;
+  setDepartments: React.Dispatch<React.SetStateAction<Department[]>>;
+  setStatuses: React.Dispatch<React.SetStateAction<Status[]>>;
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
 export const fetchData = ({
