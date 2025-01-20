@@ -16,7 +16,7 @@ export const Dropdown: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <div className="border border-black flex flex-col w-[220px]">
+      <div className="border border-black flex flex-col w-[220px] max-h-fit">
         <button
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
