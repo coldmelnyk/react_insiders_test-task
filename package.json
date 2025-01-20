@@ -1,5 +1,6 @@
 {
-  "name": "template_react-ts",
+  "name": "react_insiders_test-task",
+  "homepage": "https://coldmelnyk.github.io/react_insiders_test-task/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +13,7 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
+    "flowbite": "^2.5.2",
     "motion": "^11.18.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
