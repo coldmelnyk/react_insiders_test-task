@@ -16,11 +16,11 @@ export const Dropdown: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <div className="border border-black flex flex-col w-[220px] max-h-fit">
+      <div className="border bg-white border-black flex flex-col w-[220px] max-h-fit">
         <button
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
-          className="h-[48px] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="h-[48px] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-between items-center"
           type="button"
           onClick={() =>
             handleOpenedDropdowns(state => {
@@ -58,17 +58,17 @@ export const Dropdown: React.FC<Props> = ({
 
         <div
           id="dropdown"
-          className={cn('z-10 divide-y dark:bg-gray-700', {
+          className={cn('z-10 divide-y', {
             hidden: !openedDropdowns.includes(name)
           })}
         >
           <ul
-            className="text-sm text-gray-700 dark:text-gray-200"
+            className="text-sm text-gray-700"
             aria-labelledby="dropdownDefaultButton"
           >
             {props.map(data => (
               <li key={data.value}>
-                <p className="block px-5 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <p className="block px-5 py-2 hover:bg-gray-100">
                   {data.name}
                 </p>
               </li>

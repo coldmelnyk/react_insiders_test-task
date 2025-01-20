@@ -32,31 +32,74 @@ export const UserPage: React.FC<Props> = ({ page }) => {
 
       {page === 'USERS' ? (
         <>
-          <p>
+          <p className="mb-[12px]">
             Please add at least 3 departments to be able to proceed next steps.
           </p>
 
           {isAllDataFetched && (
             <>
-              <div className='flex flex-row gap-[12px]'>
-                <Dropdown
-                  props={countries}
-                  name="Select country"
-                  handleOpenedDropdowns={setOpenedDropdowns}
-                  openedDropdowns={openedDropdowns}
-                />
-                <Dropdown
-                  props={departments}
-                  name="All statuses"
-                  handleOpenedDropdowns={setOpenedDropdowns}
-                  openedDropdowns={openedDropdowns}
-                />
-                <Dropdown
-                  props={statuses}
-                  name="Departments"
-                  handleOpenedDropdowns={setOpenedDropdowns}
-                  openedDropdowns={openedDropdowns}
-                />
+              <div className='relative min-w-full h-[48px] mb-[40px]'>
+                <div className="absolute z-50 flex flex-row gap-[12px]">
+                  <Dropdown
+                    props={countries}
+                    name="Select country"
+                    handleOpenedDropdowns={setOpenedDropdowns}
+                    openedDropdowns={openedDropdowns}
+                  />
+                  <Dropdown
+                    props={departments}
+                    name="All statuses"
+                    handleOpenedDropdowns={setOpenedDropdowns}
+                    openedDropdowns={openedDropdowns}
+                  />
+                  <Dropdown
+                    props={statuses}
+                    name="Departments"
+                    handleOpenedDropdowns={setOpenedDropdowns}
+                    openedDropdowns={openedDropdowns}
+                  />
+                </div>
+              </div>
+
+              <div className="relative overflow-x-auto">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <thead className="h-[76px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" className="px-6 py-3">
+                        Full name
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Department
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Country
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map(user => (
+                      <>
+                        <tr
+                          key={user.name}
+                          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        >
+                          <th
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            {user.name}
+                          </th>
+                          <td className="px-6 py-4">{user.department.name}</td>
+                          <td className="px-6 py-4">{user.country.name}</td>
+                          <td className="px-6 py-4">{user.status.name}</td>
+                        </tr>
+                      </>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </>
           )}
