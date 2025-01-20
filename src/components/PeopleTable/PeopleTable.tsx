@@ -1,10 +1,10 @@
-import React from "react";
-import { User } from "../../types";
-import { PersonTab } from "../PersonTab";
+import React from 'react';
+import { User } from '../../types';
+import { PersonTab } from '../PersonTab';
 
 interface Props {
-  users: User[],
-  handleUsers: React.Dispatch<React.SetStateAction<User[]>>
+  users: User[];
+  handleUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
 export const PeopleTable: React.FC<Props> = ({ users, handleUsers }) => {
@@ -29,7 +29,12 @@ export const PeopleTable: React.FC<Props> = ({ users, handleUsers }) => {
         </thead>
         <tbody>
           {users.map(user => (
-            <PersonTab user={user} users={users} handleUsers={handleUsers} />
+            <PersonTab
+              key={user.name}
+              user={user}
+              users={users}
+              handleUsers={handleUsers}
+            />
           ))}
         </tbody>
       </table>
