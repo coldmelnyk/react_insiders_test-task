@@ -8,11 +8,12 @@ export const Root = () => {
     <BrowserRouter>
       <Routes>
         <Route path={Paths.HOME} element={<App />}>
+          <Route index element={<UserPage page={'USERS'} />} />
           <Route path={Paths.USERS} element={<UserPage page={'USERS'} />} />
           <Route path={Paths.EDIT} element={<UserPage page={'EDIT USER'} />} />
         </Route>
 
-        <Route path={Paths.NOT_FOUND} element={<Navigate to={Paths.HOME} />} />
+        <Route path={Paths.NOT_FOUND} element={<Navigate to={Paths.USERS} />} />
       </Routes>
     </BrowserRouter>
   );

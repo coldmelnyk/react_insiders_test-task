@@ -15,10 +15,18 @@ export const fetchData = ({
   setUsers
 }: Props) => {
   Promise.all([
-    fetch('/api/countries.json').then(response => response.json()),
-    fetch('/api/departments.json').then(response => response.json()),
-    fetch('/api/statuses.json').then(response => response.json()),
-    fetch('/api/users.json').then(response => response.json())
+    fetch('/react_insiders_test-task/api/countries.json').then(response =>
+      response.json()
+    ),
+    fetch('/react_insiders_test-task/api/departments.json').then(response =>
+      response.json()
+    ),
+    fetch('/react_insiders_test-task/api/statuses.json').then(response =>
+      response.json()
+    ),
+    fetch('/react_insiders_test-task/api/users.json').then(response =>
+      response.json()
+    )
   ])
     .then(data => {
       setCountries(data[0]);
