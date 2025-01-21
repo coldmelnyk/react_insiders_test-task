@@ -3,6 +3,8 @@ import { Dropdown } from '../components/Dropdown';
 import { fetchData } from '../utils/fetchData';
 import { Country, Department, Status, User } from '../types';
 import { PeopleTable } from '../components/PeopleTable';
+import { Loader } from '../components/Loader';
+import { FetchStatus } from '../enums';
 
 interface Props {
   page: string;
@@ -14,15 +16,18 @@ export const UserPage: React.FC<Props> = ({ page }) => {
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [openedDropdowns, setOpenedDropdowns] = useState<string[]>([]);
-
-  const isAllDataFetched =
-    countries?.length !== 0 &&
-    departments?.length !== 0 &&
-    statuses?.length !== 0 &&
-    users?.length !== 0;
+  const [loading, setLoading] = useState<FetchStatus>(FetchStatus.LOADING);
 
   useEffect(() => {
-    fetchData({ setCountries, setDepartments, setStatuses, setUsers });
+    setLoading(FetchStatus.LOADING);
+
+    fetchData({
+      setCountries,
+      setDepartments,
+      setStatuses,
+      setUsers,
+      setLoading
+    });
   }, []);
 
   return (
@@ -33,7 +38,7 @@ export const UserPage: React.FC<Props> = ({ page }) => {
 
       {page === 'USERS' ? (
         <>
-          {isAllDataFetched ? (
+          {loading === FetchStatus.SUCCESS ? (
             <>
               <p className="mb-[12px]">
                 Please add at least 3 departments to be able to proceed next
@@ -66,7 +71,7 @@ export const UserPage: React.FC<Props> = ({ page }) => {
               <PeopleTable users={users} handleUsers={setUsers} />
             </>
           ) : (
-            <p>There is no user available.</p>
+            <Loader />
           )}
         </>
       ) : (

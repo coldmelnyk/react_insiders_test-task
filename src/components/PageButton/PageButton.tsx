@@ -9,8 +9,6 @@ interface Props {
 export const PageButton: React.FC<Props> = ({ page }) => {
   const location = useLocation();
 
-  console.log(location.pathname);
-
   return (
     <NavLink
       className={cn(
