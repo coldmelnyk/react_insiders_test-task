@@ -9,6 +9,8 @@ interface Props {
 export const PageButton: React.FC<Props> = ({ page }) => {
   const location = useLocation();
 
+  console.log(location.pathname);
+
   return (
     <NavLink
       className={cn(
@@ -16,8 +18,8 @@ export const PageButton: React.FC<Props> = ({ page }) => {
         {
           'bg-[#C4C4C4]':
             page[1] === location.pathname ||
-            (page[1] === '/react_insiders_test-task/users' &&
-              location.pathname === '/react_insiders_test-task/')
+            (page[1] === '/users' &&
+              location.pathname === '/'),
         }
       )}
       to={`${page[1]}`}
