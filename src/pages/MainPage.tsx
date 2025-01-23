@@ -15,7 +15,7 @@ export const MainPage: React.FC<Props> = ({ page }) => {
   const [departments, setDepartments] = useState<Department[]>([]);
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [openedDropdowns, setOpenedDropdowns] = useState<string[]>([]);
+
   const [loading, setLoading] = useState<FetchStatus>(FetchStatus.LOADING);
 
   useEffect(() => {
@@ -47,8 +47,6 @@ export const MainPage: React.FC<Props> = ({ page }) => {
               departments={departments}
               statuses={statuses}
               users={users}
-              openedDropdowns={openedDropdowns}
-              setOpenedDropdowns={setOpenedDropdowns}
               handleUsers={setUsers}
             />
           ) : (

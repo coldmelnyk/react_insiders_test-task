@@ -1,9 +1,9 @@
-import { Dropdown } from '../components/Dropdown';
 import { PeopleTable } from '../components/PeopleTable';
-import React from 'react';
+import React, { useState } from 'react';
 import { Country, Department, Status, User } from '../types';
 import { ErrorModal } from '../components/ErrorModal';
 import { FetchStatus } from '../enums';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 
 interface Props {
   countries: Country[];
@@ -11,10 +11,14 @@ interface Props {
   users: User[];
   statuses: Status[];
   handleUsers: React.Dispatch<React.SetStateAction<User[]>>;
-  openedDropdowns: string[];
-  setOpenedDropdowns: React.Dispatch<React.SetStateAction<string[]>>;
-  loading:  FetchStatus;
+  loading: FetchStatus;
 }
+
+// const initialFilters = {
+//   countries: [],
+//   departments: [],
+//   statuses: []
+// };
 
 export const UserPage: React.FC<Props> = ({
   users,
@@ -22,10 +26,16 @@ export const UserPage: React.FC<Props> = ({
   statuses,
   countries,
   departments,
-  openedDropdowns,
-  setOpenedDropdowns,
   loading
 }) => {
+  // const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [selectedCountries, setSelectedCountries] = useState<Country | null>(
+    null
+  );
+  const [selectedStatuses, setSelectedStatuses] = useState<Status | null>(null);
+  const [selectedDepartments, setSelectedDepartments] =
+    useState<Country | null>(null);
+
   return (
     <>
       {loading !== FetchStatus.ERROR ? (
@@ -36,23 +46,44 @@ export const UserPage: React.FC<Props> = ({
 
           <div className="relative min-w-full h-[48px] mb-[40px]">
             <div className="absolute z-50 flex flex-row gap-[12px]">
-              <Dropdown
-                props={countries}
-                name="Select country"
-                handleOpenedDropdowns={setOpenedDropdowns}
-                openedDropdowns={openedDropdowns}
+              <MultiSelect
+                value={selectedCountries}
+                onChange={(e: MultiSelectChangeEvent) =>
+                  setSelectedCountries(e.value)
+                }
+                options={countries}
+                optionLabel="name"
+                placeholder="Select countries"
+                maxSelectedLabels={0}
+                pt={{
+                  root: { className: 'md:w-[220px]' }
+                }}
               />
-              <Dropdown
-                props={departments}
-                name="All statuses"
-                handleOpenedDropdowns={setOpenedDropdowns}
-                openedDropdowns={openedDropdowns}
+              <MultiSelect
+                value={selectedStatuses}
+                onChange={(e: MultiSelectChangeEvent) =>
+                  setSelectedStatuses(e.value)
+                }
+                options={statuses}
+                optionLabel="name"
+                placeholder="All statuses"
+                maxSelectedLabels={0}
+                pt={{
+                  root: { className: 'md:w-[220px]' }
+                }}
               />
-              <Dropdown
-                props={statuses}
-                name="Departments"
-                handleOpenedDropdowns={setOpenedDropdowns}
-                openedDropdowns={openedDropdowns}
+              <MultiSelect
+                value={selectedDepartments}
+                onChange={(e: MultiSelectChangeEvent) =>
+                  setSelectedDepartments(e.value)
+                }
+                options={departments}
+                optionLabel="name"
+                placeholder="Select departments"
+                maxSelectedLabels={0}
+                pt={{
+                  root: { className: 'md:w-[220px]' }
+                }}
               />
             </div>
           </div>
