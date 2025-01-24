@@ -1,6 +1,6 @@
 import { PeopleTable } from '../components/PeopleTable';
 import React, { useState } from 'react';
-import { Country, Department, Status, User } from '../types';
+import { Country, Department, Filters, Status, User } from '../types';
 import { ErrorModal } from '../components/ErrorModal';
 import { FetchStatus } from '../enums';
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
@@ -14,11 +14,11 @@ interface Props {
   loading: FetchStatus;
 }
 
-// const initialFilters = {
-//   countries: [],
-//   departments: [],
-//   statuses: []
-// };
+const initialFilters = {
+  countries: [],
+  departments: [],
+  statuses: []
+};
 
 export const UserPage: React.FC<Props> = ({
   users,
@@ -28,10 +28,7 @@ export const UserPage: React.FC<Props> = ({
   departments,
   loading
 }) => {
-  // const [filters, setFilters] = useState<Filters>(initialFilters);
-  const [selectedCountries, setSelectedCountries] = useState<Country[]>([]);
-  const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([]);
-  const [selectedDepartments, setSelectedDepartments] = useState<Country[]>([]);
+  const [filters, setFilters] = useState<Filters>(initialFilters);
 
   return (
     <>
@@ -44,9 +41,11 @@ export const UserPage: React.FC<Props> = ({
           <div className="relative min-w-full h-[48px] mb-[40px]">
             <div className="absolute z-50 flex flex-row gap-[12px]">
               <MultiSelect
-                value={selectedCountries}
+                value={filters.countries}
                 onChange={(e: MultiSelectChangeEvent) =>
-                  setSelectedCountries(e.value)
+                  setFilters(state => {
+                    return { ...state, countries: e.value };
+                  })
                 }
                 options={countries}
                 optionLabel="name"
@@ -57,9 +56,11 @@ export const UserPage: React.FC<Props> = ({
                 }}
               />
               <MultiSelect
-                value={selectedStatuses}
+                value={filters.statuses}
                 onChange={(e: MultiSelectChangeEvent) =>
-                  setSelectedStatuses(e.value)
+                  setFilters(state => {
+                    return { ...state, statuses: e.value };
+                  })
                 }
                 options={statuses}
                 optionLabel="name"
@@ -70,9 +71,11 @@ export const UserPage: React.FC<Props> = ({
                 }}
               />
               <MultiSelect
-                value={selectedDepartments}
+                value={filters.departments}
                 onChange={(e: MultiSelectChangeEvent) =>
-                  setSelectedDepartments(e.value)
+                  setFilters(state => {
+                    return { ...state, departments: e.value };
+                  })
                 }
                 options={departments}
                 optionLabel="name"
