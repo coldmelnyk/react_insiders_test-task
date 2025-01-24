@@ -29,12 +29,9 @@ export const UserPage: React.FC<Props> = ({
   loading
 }) => {
   // const [filters, setFilters] = useState<Filters>(initialFilters);
-  const [selectedCountries, setSelectedCountries] = useState<Country | null>(
-    null
-  );
-  const [selectedStatuses, setSelectedStatuses] = useState<Status | null>(null);
-  const [selectedDepartments, setSelectedDepartments] =
-    useState<Country | null>(null);
+  const [selectedCountries, setSelectedCountries] = useState<Country[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([]);
+  const [selectedDepartments, setSelectedDepartments] = useState<Country[]>([]);
 
   return (
     <>
