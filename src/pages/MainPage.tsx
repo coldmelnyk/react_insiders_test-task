@@ -5,6 +5,7 @@ import { FetchStatus } from '../enums';
 import { UserPage } from './UserPage.tsx';
 import { EditPage } from './EditPage.tsx';
 import { Loader } from '../components/Loader';
+import cn from 'classnames';
 
 interface Props {
   page: string;
@@ -32,7 +33,14 @@ export const MainPage: React.FC<Props> = ({ page }) => {
 
   return (
     <div className="p-[80px] pt-[60px] border border-black">
-      <h2 className="text-center font-[500] text-2xl tracking-[6px] mb-[40px]">
+      <h2
+        className={cn(
+          'text-center font-[500] text-2xl tracking-[6px] mb-10',
+          {
+            'mb-20': page !== 'USERS'
+          }
+        )}
+      >
         {page}
       </h2>
 
@@ -50,7 +58,13 @@ export const MainPage: React.FC<Props> = ({ page }) => {
               handleUsers={setUsers}
             />
           ) : (
-            <EditPage />
+            <EditPage
+              countries={countries}
+              departments={departments}
+              statuses={statuses}
+              users={users}
+              handleUsers={setUsers}
+            />
           )}
         </>
       )}

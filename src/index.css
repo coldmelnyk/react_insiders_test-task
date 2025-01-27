@@ -6,7 +6,6 @@
   * {
     box-sizing: border-box;
   }
-
 }
 
 @layer components {
@@ -17,4 +16,13 @@
     background-size: 24px;
     cursor: pointer;
   }
+
+  .button-disable {
+    color: #C4C4C4 !important;
+  }
+}
+
+.p-button:hover {
+  background-color: #C4C4C4 !important;
+  border-color: #C4C4C4 !important;
 }
