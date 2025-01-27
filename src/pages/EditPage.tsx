@@ -15,7 +15,8 @@ export const EditPage: React.FC<Props> = ({
   countries,
   departments,
   statuses,
-  users
+  users,
+  handleUsers
 }) => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   // const perevirka = () => {
@@ -45,7 +46,9 @@ export const EditPage: React.FC<Props> = ({
           countries={countries}
           departments={departments}
           statuses={statuses}
-          user={selectedUser}
+          users={users}
+          selectedUser={selectedUser}
+          handleUsers={handleUsers}
         />
       )}
     </div>

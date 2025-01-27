@@ -3,32 +3,58 @@ import { Country, Department, Status, User } from '../../types';
 import { SelectComponent } from '../SelectComponent';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import { editUsersByName } from '../../utils/editUsersByName.ts';
 
 interface Props {
   countries: Country[];
   departments: Department[];
-  user: User;
+  selectedUser: User;
+  users: User[];
   statuses: Status[];
+  handleUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
 export const UserInfo: React.FC<Props> = ({
   countries,
-  user,
+  selectedUser,
   statuses,
-  departments
+  departments,
+  users,
+  handleUsers
 }) => {
   // const [newUser, setNewUser] = useState(user);
   const [newDepartment, setNewDepartment] = useState<Department>(
-    user.department
+    selectedUser.department
   );
-  const [newStatus, setNewStatus] = useState<Status>(user.status);
-  const [newCountry, setNewCountry] = useState<Country>(user.country);
-  const [newName, setNewName] = useState<string>(user.name);
+  const [newStatus, setNewStatus] = useState<Status>(selectedUser.status);
+  const [newCountry, setNewCountry] = useState<Country>(selectedUser.country);
+  const [newName, setNewName] = useState<string>(selectedUser.name);
 
-  console.log(newDepartment, newStatus, newCountry, newName);
+  const isStatesModified =
+    selectedUser.name !== newName ||
+    selectedUser.country !== newCountry ||
+    selectedUser.department !== newDepartment ||
+    selectedUser.status !== newStatus;
+
+  // console.log(newDepartment, newStatus, newCountry, newName);
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
+    if (isStatesModified) {
+      const newUser = {
+        name: newName,
+        department: newDepartment,
+        country: newCountry,
+        status: newStatus
+      };
+
+      handleUsers(editUsersByName(selectedUser, newUser, users));
+    }
+  };
 
   return (
-    <>
+    <div onSubmit={(event) => handleSubmit(event)}>
       <h3 className={'mb-10 text-[20px] font-[400] tracking-[0.2px]'}>
         User Information
       </h3>
@@ -83,7 +109,7 @@ export const UserInfo: React.FC<Props> = ({
           label="Undo"
         />
         <Button
-          disabled
+          onClick={handleSubmit}
           pt={{
             root: {
               className:
@@ -91,12 +117,12 @@ export const UserInfo: React.FC<Props> = ({
             },
             label: {
               className:
-                'text-black font-light text-[14px] font-(family-name:Rubik) !button-disable'
+                'text-black font-light text-[14px] font-(family-name:Rubik) '
             }
           }}
           label="Save"
         />
       </div>
-    </>
+    </div>
   );
 };
