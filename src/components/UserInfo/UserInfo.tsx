@@ -60,15 +60,19 @@ export const UserInfo: React.FC<Props> = ({
       </h3>
 
       <div className={'grid grid-cols-2 gap-x-[80px] gap-y-[10px] mb-20'}>
-        <div>
+        <div className={'max-w-[500px]'}>
           <p>User name</p>
 
           <InputText
-            className={'h-[48px] w-full border-[#E3E8EE]'}
             type="text"
             placeholder="User name"
             defaultValue={newName}
             onChange={event => setNewName(event.target.value)}
+            pt={{
+              root: {
+                className: 'h-[48px] w-full !border-[#E3E8EE]'
+              }
+            }}
           />
         </div>
 
