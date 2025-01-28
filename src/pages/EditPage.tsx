@@ -19,22 +19,6 @@ export const EditPage: React.FC<Props> = ({
   handleUsers
 }) => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const perevirka = () => {
-    const userCountry = JSON.stringify(selectedUser!.country);
-
-    console.log(
-      'Dry: ',
-      countries.some(country => country === selectedUser!.country)
-    );
-    console.log(
-      'Stringify: ',
-      countries.some(country => JSON.stringify(country) === userCountry)
-    );
-  };
-
-  if (selectedUser !== null) {
-    perevirka();
-  }
 
   return (
     <div>

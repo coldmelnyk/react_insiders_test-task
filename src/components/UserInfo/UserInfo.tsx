@@ -36,8 +36,6 @@ export const UserInfo: React.FC<Props> = ({
     selectedUser.department !== newDepartment ||
     selectedUser.status !== newStatus;
 
-  // console.log(newDepartment, newStatus, newCountry, newName);
-
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -54,7 +52,7 @@ export const UserInfo: React.FC<Props> = ({
   };
 
   return (
-    <div onSubmit={(event) => handleSubmit(event)}>
+    <div onSubmit={event => handleSubmit(event)}>
       <h3 className={'mb-10 text-[20px] font-[400] tracking-[0.2px]'}>
         User Information
       </h3>
@@ -79,21 +77,21 @@ export const UserInfo: React.FC<Props> = ({
         <SelectComponent
           nameOfSelect={'Department'}
           selectOptions={departments}
-          selectValue={newDepartment}
+          selectValue={newDepartment.value}
           handleSelectValue={setNewDepartment}
         />
 
         <SelectComponent
           nameOfSelect={'Country'}
           selectOptions={countries}
-          selectValue={newCountry}
+          selectValue={newCountry.value}
           handleSelectValue={setNewCountry}
         />
 
         <SelectComponent
           nameOfSelect={'Status'}
           selectOptions={statuses}
-          selectValue={newStatus}
+          selectValue={newStatus.value}
           handleSelectValue={setNewStatus}
         />
       </div>

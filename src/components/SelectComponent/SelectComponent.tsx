@@ -3,8 +3,10 @@ import { Dropdown } from 'primereact/dropdown';
 
 interface Props<T> {
   nameOfSelect: string;
-  selectValue: T;
-  handleSelectValue: React.Dispatch<React.SetStateAction<T>>;
+  selectValue: T | string | null;
+  handleSelectValue:
+    | React.Dispatch<React.SetStateAction<T>>
+    | React.Dispatch<React.SetStateAction<T | null>>;
   selectOptions: T[];
 }
 
@@ -26,7 +28,16 @@ export const SelectComponent = <T,>({
       <div className="card flex justify-content-center">
         <Dropdown
           value={selectValue}
-          onChange={e => handleSelectValue(e.value)}
+          onChange={e => {
+            const selectedOption = selectOptions.find(opt => {
+
+              if (typeof opt === 'object' && opt !== null && 'value' in opt) {
+                return opt.value === e.value;
+              }
+              return opt === e.value;
+            });
+            handleSelectValue(selectedOption!);
+          }}
           options={selectOptions}
           optionLabel="name"
           placeholder="Select name"
