@@ -36,6 +36,24 @@ export const UserInfo: React.FC<Props> = ({
     selectedUser.department !== newDepartment ||
     selectedUser.status !== newStatus;
 
+  const handleUndo = () => {
+    if (newDepartment !== selectedUser.department) {
+      setNewDepartment(selectedUser.department);
+    }
+
+    if (newStatus !== selectedUser.status) {
+      setNewStatus(selectedUser.status);
+    }
+
+    if (newCountry !== selectedUser.country) {
+      setNewCountry(selectedUser.country);
+    }
+
+    if (newName !== selectedUser.name) {
+      setNewName(selectedUser.name);
+    }
+  };
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -51,6 +69,8 @@ export const UserInfo: React.FC<Props> = ({
     }
   };
 
+  console.log(newName);
+
   return (
     <div onSubmit={event => handleSubmit(event)}>
       <h3 className={'mb-10 text-[20px] font-[400] tracking-[0.2px]'}>
@@ -64,7 +84,7 @@ export const UserInfo: React.FC<Props> = ({
           <InputText
             type="text"
             placeholder="User name"
-            defaultValue={newName}
+            value={newName}
             onChange={event => setNewName(event.target.value)}
             pt={{
               root: {
@@ -98,6 +118,7 @@ export const UserInfo: React.FC<Props> = ({
 
       <div className={'flex justify-end gap-[20px]'}>
         <Button
+          onClick={handleUndo}
           pt={{
             root: {
               className:
