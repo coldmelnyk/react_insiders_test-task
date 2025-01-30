@@ -133,6 +133,7 @@ export const UserInfo: React.FC<Props> = ({
         />
         <Button
           onClick={handleSubmit}
+          disabled={!isStatesModified}
           pt={{
             root: {
               className:
