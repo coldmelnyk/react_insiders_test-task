@@ -3,7 +3,7 @@ import { Country, Department, Status, User } from '../../types';
 import { SelectComponent } from '../SelectComponent';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { editUsersByName } from '../../utils/editUsersByName.ts';
+import { editUsersByName } from '../../utils';
 
 interface Props {
   countries: Country[];
@@ -12,6 +12,7 @@ interface Props {
   users: User[];
   statuses: Status[];
   handleUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  handleSelectedUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 export const UserInfo: React.FC<Props> = ({
@@ -20,7 +21,8 @@ export const UserInfo: React.FC<Props> = ({
   statuses,
   departments,
   users,
-  handleUsers
+  handleUsers,
+  handleSelectedUser
 }) => {
   // const [newUser, setNewUser] = useState(user);
   const [newDepartment, setNewDepartment] = useState<Department>(
@@ -66,10 +68,9 @@ export const UserInfo: React.FC<Props> = ({
       };
 
       handleUsers(editUsersByName(selectedUser, newUser, users));
+      handleSelectedUser(() => newUser);
     }
   };
-
-  console.log(newName);
 
   return (
     <div onSubmit={event => handleSubmit(event)}>

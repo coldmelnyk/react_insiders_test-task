@@ -39,6 +39,7 @@ export const EditPage: React.FC<Props> = ({
           users={users}
           selectedUser={selectedUser}
           handleUsers={handleUsers}
+          handleSelectedUser={setSelectedUser}
         />
       )}
     </div>
