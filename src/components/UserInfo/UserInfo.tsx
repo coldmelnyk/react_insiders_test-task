@@ -72,8 +72,6 @@ export const UserInfo: React.FC<Props> = ({
     }
   };
 
-  console.log(newName);
-
   useEffect(() => {
     if (selectedUser.name !== newName) {
       setNewName(selectedUser.name);
