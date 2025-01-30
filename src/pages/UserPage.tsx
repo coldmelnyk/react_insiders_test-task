@@ -4,6 +4,7 @@ import { Country, Department, Filters, Status, User } from '../types';
 import { ErrorModal } from '../components/ErrorModal';
 import { FetchStatus } from '../enums';
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
+import { filteringPeopleArray } from '../utils';
 
 interface Props {
   countries: Country[];
@@ -30,6 +31,7 @@ export const UserPage: React.FC<Props> = ({
 }) => {
   const [filters, setFilters] = useState<Filters>(initialFilters);
 
+  const filteredPeople = filteringPeopleArray({ filters, users });
   return (
     <>
       {loading !== FetchStatus.ERROR ? (
@@ -88,7 +90,7 @@ export const UserPage: React.FC<Props> = ({
             </div>
           </div>
 
-          <PeopleTable users={users} handleUsers={handleUsers} />
+          <PeopleTable users={filteredPeople} handleUsers={handleUsers} />
         </>
       ) : (
         <ErrorModal />
