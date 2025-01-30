@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Country, Department, Status, User } from '../../types';
 import { SelectComponent } from '../SelectComponent';
 import { InputText } from 'primereact/inputtext';
@@ -71,6 +71,23 @@ export const UserInfo: React.FC<Props> = ({
       handleSelectedUser(() => newUser);
     }
   };
+
+  console.log(newName);
+
+  useEffect(() => {
+    if (selectedUser.name !== newName) {
+      setNewName(selectedUser.name);
+    }
+    if (selectedUser.department !== newDepartment) {
+      setNewDepartment(selectedUser.department);
+    }
+    if (selectedUser.status !== newStatus) {
+      setNewStatus(selectedUser.status);
+    }
+    if (selectedUser.country !== newCountry) {
+      setNewCountry(selectedUser.country);
+    }
+  }, [selectedUser]);
 
   return (
     <div onSubmit={event => handleSubmit(event)}>

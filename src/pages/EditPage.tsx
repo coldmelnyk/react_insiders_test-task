@@ -20,6 +20,8 @@ export const EditPage: React.FC<Props> = ({
 }) => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
+  console.log(selectedUser?.name);
+
   return (
     <div>
       <div className="mb-[60px]">
